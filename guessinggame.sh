@@ -2,15 +2,15 @@
 # File: guessinggame.sh
 
 function evaluateguess {
-    local numfiles=$(ls . | wc -l)
+    local numfiles=$(ls -la . | grep ^- | wc -l)
 
-    if [[ $guess =~ ^[A-Za-z]+ ]]
+    if [[ $guess =~ [^0-9] ]]
     then
-        echo "Please enter an integer value."
+        echo "Please enter a positive integer value."
     elif [[ $guess -eq $numfiles ]]
     then
         echo "Congratulations! You correctly guessed that $numfiles file(s) are in the current directory."
-        let correct=true
+        correct=true
     elif [[ $guess -ne $numfiles ]]
     then
         if [[ $guess -lt $numfiles ]]
